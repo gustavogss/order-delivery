@@ -6,5 +6,6 @@
 - Expo
 - Navigation
 - TypeScript
+- Navitewind
 
 ## APP :iphone:

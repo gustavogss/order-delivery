@@ -1,13 +1,11 @@
-import React from 'react';
-import { Home } from '../screens/Home';
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
 
-export default function App() {
+import React from 'react';
+import { View, Text } from 'react-native';
+
+export default function Home() {
     return (
-        <SafeAreaView>
-            <Home />
-            <StatusBar style="auto" />
-        </SafeAreaView>
+        <View className='flex-1 pt-8'>
+            <Text className='text-slate-50 text-xl'>Order Delivery</Text> 
+        </View>
     );
 }
