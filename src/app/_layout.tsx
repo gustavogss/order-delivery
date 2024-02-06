@@ -8,7 +8,7 @@ import {
     Inter_600SemiBold,
     Inter_700Bold,
 } from '@expo-google-fonts/inter';
-import { Loading } from '../components/loading';
+import { Loading } from '@/components/loading';
 
 
 export default function Layout() {
