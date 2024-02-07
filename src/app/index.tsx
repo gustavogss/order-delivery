@@ -2,8 +2,9 @@
 import { Category } from '@/components/category';
 import { Header } from '@/components/header';
 import React, { useState } from 'react';
-import { View, FlatList } from 'react-native';
-import {CATEGORIES} from '@/utils/db/products'
+import { View, FlatList, SectionList, Text } from 'react-native';
+import {CATEGORIES, MENU} from '@/utils/db/products'
+import { Product } from '@/components/product';
 
 
 export default function Home() {
@@ -29,6 +30,21 @@ export default function Home() {
                 isSelected={item === category} 
                 onPress={()=> handleCategorySelected(item)}/>
             )}
+            />
+
+            <SectionList           
+            sections={MENU}
+            keyExtractor={(item)=> item.id}
+            stickySectionHeadersEnabled={false}
+            renderItem={({item})=>(
+              <Product data={item}/>
+            )}
+            renderSectionHeader={({section: {title}})=>(
+                <Text className='text-slate-50 text-xl font-heading mt-9 mb-6'>{title}</Text>
+            )}
+            className='flex-1 p-5'
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{paddingBottom: 100}}
             />
         </View>
     );

@@ -7,5 +7,6 @@
 - Navigation
 - TypeScript
 - Navitewind
+- CLSX
 
 ## APP :iphone:
