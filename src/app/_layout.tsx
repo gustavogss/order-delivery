@@ -9,6 +9,7 @@ import {
     Inter_700Bold,
 } from '@expo-google-fonts/inter';
 import { Loading } from '@/components/loading';
+import { StatusBar } from 'expo-status-bar';
 
 
 export default function Layout() {
@@ -25,6 +26,7 @@ export default function Layout() {
     return (
         <SafeAreaView className='bg-slate-900 flex-1 '>
             <Slot />
+            <StatusBar style={'light'}/>
         </SafeAreaView>
     );
 }
