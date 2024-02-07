@@ -3,9 +3,9 @@ import { View, Image, Text, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons'
 import colors from 'tailwindcss/colors';
 
-interface HeaderProps {
-    title: string;
-    qtdItems?: number;
+type HeaderProps = {
+    title: string
+    qtdItems?: number
 }
 
 export function Header({ title, qtdItems = 0 }: HeaderProps) {
