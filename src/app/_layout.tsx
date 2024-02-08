@@ -1,5 +1,4 @@
 import { Slot } from 'expo-router';
-import React from 'react';
 import { SafeAreaView } from 'react-native';
 import {
     useFonts,

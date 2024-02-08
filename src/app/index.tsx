@@ -1,7 +1,7 @@
 
 import { Category } from '@/components/category';
 import { Header } from '@/components/header';
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { View, FlatList, SectionList, Text } from 'react-native';
 import {CATEGORIES, MENU} from '@/utils/db/products'
 import { Product } from '@/components/product';

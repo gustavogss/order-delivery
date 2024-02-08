@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pressable, Text, PressableProps } from 'react-native';
 import {clsx} from 'clsx'
 

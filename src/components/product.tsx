@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import { TouchableOpacity, TouchableOpacityProps, Image, ImageProps, View, Text } from 'react-native';
 
 type ProductDataProps = {
