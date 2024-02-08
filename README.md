@@ -8,5 +8,6 @@
 - TypeScript
 - Navitewind
 - CLSX
+- Zustand
 
 ## APP :iphone:

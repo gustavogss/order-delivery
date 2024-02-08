@@ -6,10 +6,14 @@ import { View, FlatList, SectionList, Text } from 'react-native';
 import {CATEGORIES, MENU} from '@/utils/db/products'
 import { Product } from '@/components/product';
 import { Link } from 'expo-router';
+import { useCartStore } from '@/stores/cart-store';
 
 
 export default function Home() {
+    const cartStore = useCartStore()
     const [category, setCategory] = useState(CATEGORIES[0]);
+
+    const cartQtdItems = cartStore.products.reduce((total, product) => total + product.quantity, 0)
 
     const sectionListRef = useRef<SectionList> (null)
 
@@ -30,7 +34,7 @@ export default function Home() {
 
     return (
         <View className='flex-1 pt-20'>
-           <Header title="Faça o seu pedido" qtdItems={1}/>
+           <Header title="Faça o seu pedido" qtdItems={cartQtdItems}/>
             <FlatList 
             horizontal
             showsHorizontalScrollIndicator={false}
