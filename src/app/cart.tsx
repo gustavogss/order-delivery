@@ -4,13 +4,14 @@ import { Product } from '@/components/product';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { ProductCartProps, useCartStore } from '@/stores/cart-store';
 import { formatCurrency } from '@/utils/functions/format-currency';
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, ScrollView, Text, View } from 'react-native';
 import { Button } from '@/components/button';
 import { Feather } from '@expo/vector-icons';
 import { ButtonBack } from '@/components/button-back';
 
 export default function Cart() {
+    const [address, setAddress] = useState("")
     const cartStore = useCartStore()
     const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0))
 
@@ -25,6 +26,12 @@ export default function Cart() {
             }
         ])
     } 
+
+    function handleOrder() {
+        if(address.trim().length === 0){
+            Alert.alert("Pedido", "Informe os dados da entrega")
+        }
+    }
 
     return (
         <View className='flex-1 pt-16'>
@@ -54,12 +61,15 @@ export default function Cart() {
                                 {total}
                             </Text>
                         </View>
-                        <Input placeholder='Informe o endereço de entrega completo com rua, bairro, número, cep ...' />
+                        <Input 
+                        placeholder='Informe o endereço de entrega completo com rua, bairro, número, cep ...' 
+                        onChangeText={setAddress}
+                        />
                     </View>
                 </ScrollView>
             </KeyboardAwareScrollView>
             <View className='p-5 gap-5'>
-                <Button>
+                <Button onPress={handleOrder}>
                     <Button.Text>Enviar Pedido</Button.Text>
                     <Button.Icon>
                         <Feather name='arrow-right-circle' size={20}/>
