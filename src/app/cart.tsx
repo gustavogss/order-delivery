@@ -9,10 +9,12 @@ import { Alert, ScrollView, Text, View } from 'react-native';
 import { Button } from '@/components/button';
 import { Feather } from '@expo/vector-icons';
 import { ButtonBack } from '@/components/button-back';
+import { useNavigation } from 'expo-router';
 
 export default function Cart() {
     const [address, setAddress] = useState("")
     const cartStore = useCartStore()
+    const navigation = useNavigation()
     const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0))
 
     function handlerProductRemove(product: ProductCartProps){
@@ -44,8 +46,9 @@ export default function Cart() {
 
         \n Valor total: ${total}
 
-
         `
+        cartStore.clear()
+        navigation.goBack()
     }
 
     return (
@@ -79,6 +82,9 @@ export default function Cart() {
                         <Input 
                         placeholder='Informe o endereço de entrega completo com rua, bairro, número, cep ...' 
                         onChangeText={setAddress}
+                        blurOnSubmit = {true}
+                        onSubmitEditing={handleOrder}
+                        returnKeyType='next'
                         />
                     </View>
                 </ScrollView>
