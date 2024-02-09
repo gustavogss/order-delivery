@@ -2,14 +2,29 @@ import { Header } from '@/components/header';
 import { Input } from '@/components/input';
 import { Product } from '@/components/product';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { useCartStore } from '@/stores/cart-store';
+import { ProductCartProps, useCartStore } from '@/stores/cart-store';
 import { formatCurrency } from '@/utils/functions/format-currency';
 import React from 'react';
-import { ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, Text, View } from 'react-native';
+import { Button } from '@/components/button';
+import { Feather } from '@expo/vector-icons';
+import { ButtonBack } from '@/components/button-back';
 
 export default function Cart() {
     const cartStore = useCartStore()
     const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0))
+
+    function handlerProductRemove(product: ProductCartProps){
+        Alert.alert("Remover", `Deseja remover ${product.title} do carrinho?`,[
+            {
+                text: "Cancelar"
+            },
+            {
+                text: "Remover",
+                onPress: () => cartStore.remove(product.id)
+            }
+        ])
+    } 
 
     return (
         <View className='flex-1 pt-16'>
@@ -23,7 +38,7 @@ export default function Cart() {
 
                                     {
                                         cartStore.products.map((product) => (
-                                            <Product key={product.id} data={product} />
+                                            <Product key={product.id} data={product} onPress={()=>handlerProductRemove(product)}/>
                                         ))}
                                 </View>
                                 :
@@ -43,6 +58,15 @@ export default function Cart() {
                     </View>
                 </ScrollView>
             </KeyboardAwareScrollView>
+            <View className='p-5 gap-5'>
+                <Button>
+                    <Button.Text>Enviar Pedido</Button.Text>
+                    <Button.Icon>
+                        <Feather name='arrow-right-circle' size={20}/>
+                    </Button.Icon>
+                </Button>
+                <ButtonBack title='Voltar ao cardápio' href='/'/>
+            </View>
         </View>
     );
 }
