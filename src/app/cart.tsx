@@ -5,7 +5,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { ProductCartProps, useCartStore } from '@/stores/cart-store';
 import { formatCurrency } from '@/utils/functions/format-currency';
 import React, { useState } from 'react';
-import { Alert, ScrollView, Text, View } from 'react-native';
+import { Alert, ScrollView, Text, View, Linking } from 'react-native';
 import { Button } from '@/components/button';
 import { Feather } from '@expo/vector-icons';
 import { ButtonBack } from '@/components/button-back';
@@ -16,6 +16,7 @@ export default function Cart() {
     const cartStore = useCartStore()
     const navigation = useNavigation()
     const total = formatCurrency(cartStore.products.reduce((total, product) => total + product.price * product.quantity, 0))
+    const PHONE_NUMBER = "5583999999"
 
     function handlerProductRemove(product: ProductCartProps){
         Alert.alert("Remover", `Deseja remover ${product.title} do carrinho?`,[
@@ -45,8 +46,9 @@ export default function Cart() {
         ${products}
 
         \n Valor total: ${total}
-
         `
+        Linking.openURL(`http://api.whatsapp.com/send?phone=${PHONE_NUMBER}&texto=${message}`)
+
         cartStore.clear()
         navigation.goBack()
     }
