@@ -31,6 +31,21 @@ export default function Cart() {
         if(address.trim().length === 0){
             Alert.alert("Pedido", "Informe os dados da entrega")
         }
+
+        const products = cartStore.products.map((product) =>
+        `\n ${product.quantity} ${product.title}`).join("")
+
+        const message = `
+        
+        🍔 NOVO PEDIDO \n 
+        Entregar em: ${address}
+
+        ${products}
+
+        \n Valor total: ${total}
+
+
+        `
     }
 
     return (
